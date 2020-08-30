@@ -26,7 +26,8 @@ const Video = ({history}) => {
     const onDetected = (result) => {
         console.log('result: ', result)
         setBarcode(result.codeResult.code);
-        Quagga.offDetected(onDetected);
+        // Quagga.offDetected(onDetected);
+        Quagga.stop();
     }
 
     const onInfoFetched = (res) => {
@@ -52,7 +53,7 @@ const Video = ({history}) => {
                 numOfWorkers: 1,
                 locate: true,
                 decoder: {
-                    readers: ['ean_reader', 'ean_8_reader', 'upc_reader', 'code_128_reader']
+                    readers: ['code_128_reader']
                 }
             }, (err) => {
                 if (err) {
