@@ -17,7 +17,7 @@ const Video = (props) => {
         props.setBarcode(result.codeResult.code);
         // Quagga.offDetected(onDetected);
         // Quagga.stop();
-        props.handleCameraVisibility(false)
+        // props.handleCameraVisibility(false)
     };
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const Video = (props) => {
                 numOfWorkers: 1,
                 locate: true,
                 decoder : {
-                    readers : ['ean_reader', 'upc_reader', 'code_128_reader']
+                    readers : ['ean_reader', 'code_128_reader']
                 }
             }, (err) => {
                 if (err) {
