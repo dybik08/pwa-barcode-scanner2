@@ -31,7 +31,7 @@ const Video = (props) => {
                 numOfWorkers: 1,
                 locate: true,
                 decoder : {
-                    readers : ['ean_reader', 'code_128_reader']
+                    readers : ['ean_reader']
                 }
             }, (err) => {
                 if (err) {
