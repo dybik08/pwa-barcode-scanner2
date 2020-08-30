@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Quagga from 'quagga';
 import VideoSkeleton from "./VideoLoader";
 
-const Video = ({history}) => {
+const Video = (props) => {
     const [videoInit, setVideoInit] = useState(false);
     const [videoError, setVideoError] = useState(false);
     const [attempts, setAttempts] = useState(0);
@@ -26,8 +26,9 @@ const Video = ({history}) => {
     const onDetected = (result) => {
         console.log('result: ', result)
         setBarcode(result.codeResult.code);
-        // Quagga.offDetected(onDetected);
+        Quagga.offDetected(onDetected);
         Quagga.stop();
+        props.handleCameraVisibility(false)
     }
 
     const onInfoFetched = (res) => {

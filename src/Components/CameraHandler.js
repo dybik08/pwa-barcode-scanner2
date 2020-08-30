@@ -9,11 +9,13 @@ const CameraHandler = () => {
     const [ isCameraSupported, setCameraSupported ] = useState(false);
     const [ isCameraEnabled, setCameraEnabled ] = useState(DataHandler.isCameraPermissionGranted());
     const [deviceInfo, setDeviceInfo] = React.useState(null);
+    const [cameraVisible, setCameraVisible] = React.useState(false);
 
     useEffect(() => {
         setDeviceInfo(JSON.stringify(navigator.mediaDevices))
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             setCameraSupported(true);
+            setCameraVisible(true)
         }
     }, [])
 
@@ -22,14 +24,17 @@ const CameraHandler = () => {
         setCameraEnabled(true);
     }
 
+    const handleCameraVisibility = (visibility) => {
+        setCameraVisible(visibility)
+    };
+
     return (
         <>
             {isCameraSupported && isCameraEnabled ?
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Video />
-                </Suspense>
-                :
-                ""
+                cameraVisible ? <Suspense fallback={<div>Loading...</div>}>
+                    <Video handleCameraVisibility={handleCameraVisibility}/>
+                </Suspense> : <div onClick={() => handleCameraVisibility(true)}>Camera hidden - press to open</div>
+                : ''
             }
             {isCameraSupported && !isCameraEnabled ?
                 <>
