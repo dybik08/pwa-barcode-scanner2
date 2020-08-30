@@ -10,12 +10,14 @@ const CameraHandler = () => {
     const [ isCameraEnabled, setCameraEnabled ] = useState(DataHandler.isCameraPermissionGranted());
     const [deviceInfo, setDeviceInfo] = React.useState(null);
     const [cameraVisible, setCameraVisible] = React.useState(false);
+    const [barcode, setBarcode] = useState(null);
+
 
     useEffect(() => {
         setDeviceInfo(JSON.stringify(navigator.mediaDevices))
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             setCameraSupported(true);
-            setCameraVisible(true)
+            // setCameraVisible(true)
         }
     }, [])
 
@@ -30,9 +32,11 @@ const CameraHandler = () => {
 
     return (
         <>
+            <p>Barcode scanned: {barcode}</p>
             {isCameraSupported && isCameraEnabled ?
                 cameraVisible ? <Suspense fallback={<div>Loading...</div>}>
-                    <Video handleCameraVisibility={handleCameraVisibility}/>
+                    <Video setBarcode={setBarcode} handleCameraVisibility={handleCameraVisibility}/>
+                    <div onClick={() => handleCameraVisibility(false)}>Turn off camera</div>
                 </Suspense> : <div onClick={() => handleCameraVisibility(true)}>Camera hidden - press to open</div>
                 : ''
             }
@@ -43,7 +47,7 @@ const CameraHandler = () => {
                         <div className="cameraHandler__messageIcon">{deviceInfo}</div>
                     </div>
                     <button type="button" aria-label="Enable Camera" className="btn__round camera__enable" onClick={onCamEnabled}>
-                        icon2
+                        Camera hidden - press to open
                     </button>
                 </>
                 :
