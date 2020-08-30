@@ -6,7 +6,7 @@ import Video from './Video';
 
 const CameraHandler = () => {
 
-    const [ isCameraSupported, setCameraSupported ] = useState(true);
+    const [ isCameraSupported, setCameraSupported ] = useState(false);
     const [ isCameraEnabled, setCameraEnabled ] = useState(DataHandler.isCameraPermissionGranted());
     const [deviceInfo, setDeviceInfo] = React.useState(null);
 
