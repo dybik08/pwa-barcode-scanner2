@@ -10,8 +10,11 @@
     "@types/node": "^12.12.54",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
+    "quagga": "^0.12.1",
     "react": "^16.13.1",
+    "react-barcode-reader": "0.0.2",
     "react-dom": "^16.13.1",
+    "react-feather": "^2.0.8",
     "react-scripts": "3.4.3",
     "typescript": "^3.7.5"
   },
